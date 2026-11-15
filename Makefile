@@ -1,6 +1,6 @@
 all: todo
 
 todo: main.c
-	clang main.c -g -Wextra -o todo -O0
+	clang main.c -o todo -Wextra -O3
 clean:
 	rm -f todo
