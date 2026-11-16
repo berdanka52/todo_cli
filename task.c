@@ -1,21 +1,3 @@
-#ifndef MAIN_HEADER
-#define MAIN_HEADER
-
-
-typedef struct {
-	char name[64];
-	int priority;
-} Task;
-
-Task* taskArray[10];
-int taskNum = 0;
-typedef enum {
-	LIST, ADD, DELETE
-} menu_choice;
-
-typedef enum {
-	READ, APPEND, WRITE
-} file_choice;
 
 FILE* fileUse(int file_choice) {
 	// Here the code is checking whether the file with tasks exists. 
@@ -56,7 +38,6 @@ FILE* fileUse(int file_choice) {
 	return fptr;
 }
 
-// This func is needed to sort tasks by priorities
 int comp(const void *a, const void *b) {
 	const Task *task_a = *(Task* const *)a;
 	const Task *task_b = *(Task* const *)b;
@@ -70,7 +51,6 @@ int comp(const void *a, const void *b) {
     if (task_a->priority > task_b->priority) return -1;
     return 0;
 }
-
 void fileRead() {
 	file_choice fileMode = READ;
 	FILE* fptr = fileUse(fileMode);
@@ -113,7 +93,6 @@ Task* askForTask() {
 
 	return newTask;
 }
-
 void addTask(Task* task) {
 	file_choice fileMode = APPEND;
 	FILE *fptr = fileUse(fileMode);
@@ -125,7 +104,6 @@ void addTask(Task* task) {
 	free(task);
 	fclose(fptr);
 }
-
 void listTasks() {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
 		
@@ -142,10 +120,9 @@ void listTasks() {
 
 	}
 }
-
 void deleteTasks () {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
-	int toDelete;
+	int toDelete = 10;
 	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
 	printf("Choose a task to delete:\n");	
 	for (int i = 0; i < taskNum; i++) {
@@ -158,7 +135,8 @@ void deleteTasks () {
 	printf("---------------------\n");
 	--taskNum;
 								
-	scanf("%d", &toDelete);
+	while (!((toDelete >= 0) || (toDelete <= 9))) scanf("%d", &toDelete);
+
 	for (int i = 0; i < arrayLength; i++) {
 		if (taskArray[i] == NULL) continue;
 		if (i == toDelete) {
@@ -182,4 +160,3 @@ void deleteTasks () {
 	fclose(fptr);
 }
 
-#endif

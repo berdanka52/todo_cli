@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "main.h"
-
+#include "task.h"
+#include "task.c"
 /* 
 Current TODO list (ironic haha)
 
