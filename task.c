@@ -136,7 +136,7 @@ void deleteTasks () {
 	printf("---------------------\n");
 	--taskNum;
 								
-	while (!((toDelete >= 0) || (toDelete <= 9))) 
+	while (!((toDelete >= 0) && (toDelete <= 9))) 
 		if (scanf("%d", &toDelete) <= 0) while (getchar() != '\n'); // Clean buffer so scanf() doesn't keep reading same chars that don't get cleaned and get stuck
 
 	for (int i = 0; i < arrayLength; i++) {
