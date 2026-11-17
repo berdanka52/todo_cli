@@ -85,10 +85,11 @@ Task* askForTask() {
 	char receivedName[64];
 	fgets(receivedName, sizeof(receivedName), stdin);
 	strcpy(newTask->name, strtok(receivedName, "\n")); //Remove newline from the string
-
-	printf("Enter task priority(1-3): ");
-	int receivedPriority;
-	scanf("%d", &receivedPriority);
+	int receivedPriority = 0;
+	while (!((receivedPriority > 0 ) && (receivedPriority < 4))) {
+		printf("Enter task priority(1-3): ");
+		if (scanf("%d", &receivedPriority) <= 0) while ((getchar()) != '\n'); // Clear the stdin buffer, otherwise scanf() gets stuck when a character is typed
+	}
 	newTask->priority = receivedPriority;
 
 	return newTask;
@@ -122,7 +123,7 @@ void listTasks() {
 }
 void deleteTasks () {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
-	int toDelete = 10;
+	int toDelete = -1; // Initialize with a value so the while loop definitely asks the user
 	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
 	printf("Choose a task to delete:\n");	
 	for (int i = 0; i < taskNum; i++) {
@@ -135,7 +136,8 @@ void deleteTasks () {
 	printf("---------------------\n");
 	--taskNum;
 								
-	while (!((toDelete >= 0) || (toDelete <= 9))) scanf("%d", &toDelete);
+	while (!((toDelete >= 0) || (toDelete <= 9))) 
+		if (scanf("%d", &toDelete) <= 0) while (getchar() != '\n'); // Clean buffer so scanf() doesn't keep reading same chars that don't get cleaned and get stuck
 
 	for (int i = 0; i < arrayLength; i++) {
 		if (taskArray[i] == NULL) continue;

@@ -23,6 +23,6 @@ make all
 ## Useful Information
 
 Your tasks are stored in `~/.todo`
-Currently the program only supports up to 9 tasks. Will work on adding more soon.
+Currently the program only supports up to 10 tasks.
 
 Also currently almost no error messages, so just make sure you type stuff right
