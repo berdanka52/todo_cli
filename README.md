@@ -6,7 +6,7 @@ Written in C.
 
 ## Usage
 
-`./todo` - list all daily tasks
+`./todo` - list all tasks 
 
 `./todo -a` - add a task
 
@@ -15,9 +15,13 @@ Written in C.
 ## Building
 
 ```
-make all
+make
 ```
 
+Adding to /usr/local/bin/:
+```
+make addToPath
+```
 (will add CMake later)
 
 ## Useful Information
