@@ -109,15 +109,15 @@ void listTasks() {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
 		
 	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
-		
+	
+	printf("---------------------\n");	
 	for (int i = 0; i < arrayLength; i++) {
 		if (taskArray[i] == NULL) continue;
-		printf("---------------------\n");
 		printf("Task name: %s\n", taskArray[i]->name);
 		printf("Task priority: %d\n", taskArray[i]->priority);
+		printf("---------------------\n");
 		free(taskArray[i]);
 		taskArray[i] = NULL;
-	printf("---------------------\n");
 
 	}
 }
