@@ -155,6 +155,7 @@ void deleteTasks () {
 		if (taskArray[i] == NULL) continue;
 		fprintf(fptr, "%s", taskArray[i]->name);
 		fprintf(fptr, "%d", taskArray[i]->priority);
+		fprintf(fptr, "\n");
 		free(taskArray[i]);
 		taskArray[i] = NULL;
 	}
