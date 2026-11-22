@@ -31,5 +31,5 @@ Task* askForTask();
 
 void addTask(Task* task);
 void listTasks(); 
-void deleteTasks(); 
+void deleteTask(); 
 #endif

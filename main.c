@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 
     } else if (!(strcmp(argv[1], "-d"))) {
 		fileRead();
-		deleteTasks();
+		deleteTask();
 	}
   	
 	return 0;

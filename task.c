@@ -121,7 +121,7 @@ void listTasks() {
 
 	}
 }
-void deleteTasks () {
+void deleteTask () {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
 	int toDelete = -1; // Initialize with a value so the while loop definitely asks the user
 	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
