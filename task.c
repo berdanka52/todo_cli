@@ -125,7 +125,7 @@ void deleteTask () {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
 	int toDelete = -1; // Initialize with a value so the while loop definitely asks the user
 	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
-	printf("Choose a task to delete:\n");	
+	printf("Tasks:\n");	
 	for (int i = 0; i < taskNum; i++) {
 		if (taskArray[i] == NULL) continue;
 		printf("---------------------\n");
@@ -134,20 +134,27 @@ void deleteTask () {
 		printf("Task priority: %d\n", taskArray[i]->priority);
 	}
 	printf("---------------------\n");
-	--taskNum;
-								
-	while (!((toDelete >= 0) && (toDelete <= 9))) 
-		if (scanf("%d", &toDelete) <= 0) while (getchar() != '\n'); // Clean buffer so scanf() doesn't keep reading same chars that don't get cleaned and get stuck
 
+
+	 // Loop that ensures that a proper task number is entered						
+	while (!((toDelete >= 0) && (toDelete <= 9))) {
+		printf("Choose a task to delete: ");
+		if (scanf("%d", &toDelete) <= 0) while (getchar() != '\n'); // Clean buffer so scanf() doesn't keep reading same chars that don't get cleaned and get stuck
+	}
+
+	// Loop that deletes the task
 	for (int i = 0; i < arrayLength; i++) {
 		if (taskArray[i] == NULL) continue;
 		if (i == toDelete) {
 			free(taskArray[i]);
 			taskArray[i] = NULL;
+			--taskNum;
 			break;
 		}
 	}
 
+
+	// This part sorts the tasks according to their priority and rewrites them in the same file
 	FILE* fptr = fileUse(WRITE);
 	
 	qsort(taskArray, arrayLength, sizeof(taskArray[0]), comp);
