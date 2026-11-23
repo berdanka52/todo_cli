@@ -20,7 +20,7 @@ make
 
 Adding to /usr/local/bin/:
 ```
-make addToPath
+make install
 ```
 (will add CMake later)
 
