@@ -20,7 +20,7 @@ make
 
 Adding to /usr/local/bin/:
 ```
-make install
+sudo make install
 ```
 (will add CMake later)
 
