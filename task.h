@@ -15,7 +15,7 @@ typedef struct {
 } Task;
 
 Task* taskArray[MAX_TASK_AMOUNT]; // Total amount of tasks loaded from the file
-char line[MAX_TASK_LENGTH]; // Maximum char length of one task (including the priority number)
+char line[MAX_TASK_LENGTH]; // Maximum char length of one task (including the priority number of tasks)
 
 int taskAmount = 0; // This variable is used internally by the program while calculating the amount of tasks in the file
 
