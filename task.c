@@ -60,11 +60,11 @@ void fileRead() {
 	while(fgets(line, sizeof(line), fptr)) {
 
 				// Check if task amount is too big
-		if (taskNum >= 9) break;
+		if (taskAmount >= MAX_TASK_AMOUNT) break;
 
 		Task* ptrTask = malloc(sizeof(Task));
 		if (ptrTask == NULL) exit(1);
-		taskArray[taskNum] = ptrTask;
+		taskArray[taskAmount] = ptrTask;
 
 		size_t len = strlen(line) - 1;  //Make len usable so in indexes it points to the last element, null terminator		
 		int taskPriority = atoi(&line[len - 1]); // Now our priority is an integer
@@ -72,7 +72,7 @@ void fileRead() {
 		
 		strcpy(ptrTask->name, line);
 		ptrTask->priority = taskPriority;
-		++taskNum; 	
+		++taskAmount; 	
 		}
 
 	fclose(fptr);		
@@ -108,7 +108,7 @@ void addTask(Task* task) {
 void listTasks() {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
 		
-	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
+	qsort(taskArray, taskAmount, sizeof(taskArray[0]), comp);
 	
 	printf("---------------------\n");	
 	for (int i = 0; i < arrayLength; i++) {
@@ -124,9 +124,9 @@ void listTasks() {
 void deleteTask () {
 	int arrayLength = sizeof(taskArray) / sizeof(taskArray[0]);
 	int toDelete = -1; // Initialize with a value so the while loop definitely asks the user
-	qsort(taskArray, taskNum, sizeof(taskArray[0]), comp);
+	qsort(taskArray, taskAmount, sizeof(taskArray[0]), comp);
 	printf("Tasks:\n");	
-	for (int i = 0; i < taskNum; i++) {
+	for (int i = 0; i < taskAmount; i++) {
 		if (taskArray[i] == NULL) continue;
 		printf("---------------------\n");
 		printf("Task number: %d\n", i);
@@ -148,7 +148,7 @@ void deleteTask () {
 		if (i == toDelete) {
 			free(taskArray[i]);
 			taskArray[i] = NULL;
-			--taskNum;
+			--taskAmount;
 			break;
 		}
 	}
@@ -158,7 +158,7 @@ void deleteTask () {
 	FILE* fptr = fileUse(WRITE);
 	
 	qsort(taskArray, arrayLength, sizeof(taskArray[0]), comp);
-	for (int i = 0; i < taskNum; i++) {
+	for (int i = 0; i < taskAmount; i++) {
 		if (taskArray[i] == NULL) continue;
 		fprintf(fptr, "%s", taskArray[i]->name);
 		fprintf(fptr, "%d", taskArray[i]->priority);
